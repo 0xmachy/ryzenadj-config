@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ryzenadj \
+  --stapm-limit=15000 \
+  --fast-limit=20000 \
+  --slow-limit=15000 \
+  --stapm-time=200 \
+  --slow-time=60 \
+  --tctl-temp=95 \
+  --vrm-current=20000 \
+  --vrmsoc-current=15000 \
+  -i
+
+echo high > /sys/class/drm/card1/device/power_dpm_force_performance_level
+echo "GPU profile: $(cat /sys/class/drm/card1/device/power_dpm_force_performance_level)"
